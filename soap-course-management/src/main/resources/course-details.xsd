@@ -7,7 +7,7 @@ xmlns:tns="http://raj.com/courses" elementFormDefault="qualified">
 	<xs:element name="GetCourseDetailsRequest">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name= "id" type="xs:integer"/>
+				<xs:element name= "id" type="xs:int"/>
 			</xs:sequence>	
 		</xs:complexType>
 	</xs:element>
@@ -22,7 +22,7 @@ xmlns:tns="http://raj.com/courses" elementFormDefault="qualified">
 	
 	<xs:complexType name="CourseDetails">
 		<xs:sequence>
-			<xs:element name="id" type="xs:integer"/>
+			<xs:element name="id" type="xs:int"/>
 			<xs:element name="name" type="xs:string"/>
 			<xs:element name="description" type="xs:string"/>
 		</xs:sequence>

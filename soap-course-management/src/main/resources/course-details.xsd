@@ -18,7 +18,15 @@ xmlns:tns="http://raj.com/courses" elementFormDefault="qualified">
 				<xs:element name= "CourseDetails" type="tns:CourseDetails"/>
 			</xs:sequence>	
 		</xs:complexType>
+		
 	</xs:element>
+	
+	<xs:element name="GetAllCourseDetailsRequest">
+		<xs:complexType></xs:complexType>
+	</xs:element>
+	
+	
+	
 	
 	<xs:complexType name="CourseDetails">
 		<xs:sequence>

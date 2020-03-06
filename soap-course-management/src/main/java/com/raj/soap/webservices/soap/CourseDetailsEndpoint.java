@@ -9,12 +9,16 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.raj.courses.CourseDetails;
+import com.raj.courses.DeleteCourseDetailsRequest;
+import com.raj.courses.DeleteCourseDetailsResponse;
 import com.raj.courses.GetAllCourseDetailsRequest;
 import com.raj.courses.GetAllCourseDetailsResponse;
 import com.raj.courses.GetCourseDetailsRequest;
 import com.raj.courses.GetCourseDetailsResponse;
 import com.raj.soap.webservices.soap.bean.Course;
+import com.raj.soap.webservices.soap.exception.CourseNotFoundException;
 import com.raj.soap.webservices.soap.service.CourseDetailsService;
+import com.raj.soap.webservices.soap.service.CourseDetailsService.Status;
 
 @Endpoint
 public class CourseDetailsEndpoint {
@@ -33,6 +37,10 @@ public class CourseDetailsEndpoint {
 	public GetCourseDetailsResponse processCourseDetailsRequest(@RequestPayload GetCourseDetailsRequest request) {
 
 		Course course = service.findById(request.getId());
+		
+		if(course ==null) {
+			throw new CourseNotFoundException("Invalid Course Id: "+request.getId());
+		}
 
 		return mapCourseDetails(course);
 	}
@@ -72,5 +80,23 @@ public class CourseDetailsEndpoint {
 
 		return mapAllCourseDetails(courses);
 	}
+	
+	@PayloadRoot(namespace = "http://raj.com/courses", localPart = "DeleteCourseDetailsRequest")
+	@ResponsePayload
+	public DeleteCourseDetailsResponse deleteCourseDetailsRequest(@RequestPayload DeleteCourseDetailsRequest request) {
+
+		Status status = service.deleteById(request.getId());
+		DeleteCourseDetailsResponse response = new DeleteCourseDetailsResponse();
+		response.setStatus(mapStatus(status));
+
+		return response;
+	}
+
+	private Status mapStatus(Status status) {
+		if(status == Status.FAILURE)
+			return Status.FAILURE;
+		return Status.SUCCESS;
+	}
+
 
 }

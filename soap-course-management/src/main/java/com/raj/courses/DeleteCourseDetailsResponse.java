@@ -10,8 +10,11 @@ package com.raj.courses;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.raj.soap.webservices.soap.service.CourseDetailsService.Status;
 
 
 /**
@@ -23,6 +26,9 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="status" type="{http://raj.com/courses}Status"/>
+ *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -31,9 +37,37 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-@XmlRootElement(name = "GetAllCourseDetailsRequest")
-public class GetAllCourseDetailsRequest {
+@XmlType(name = "", propOrder = {
+    "status"
+})
+@XmlRootElement(name = "DeleteCourseDetailsResponse")
+public class DeleteCourseDetailsResponse {
 
+    @XmlElement(required = true)
+    protected Status status;
+
+    /**
+     * Gets the value of the status property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Status }
+     *     
+     */
+    public Status getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the value of the status property.
+     * 
+     * @param status2
+     *     allowed object is
+     *     {@link Status }
+     *     
+     */
+    public void setStatus(com.raj.soap.webservices.soap.service.CourseDetailsService.Status status2) {
+        this.status = status2;
+    }
 
 }
